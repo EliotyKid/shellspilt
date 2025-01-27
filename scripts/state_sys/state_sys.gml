@@ -1,3 +1,4 @@
+//By @Elioty
 function init_states(){
     self[$ "states"] = []
     self[$ "current_state"] = noone

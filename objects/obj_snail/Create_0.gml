@@ -5,15 +5,16 @@ max_vsp = 8
 hsp = 0
 vsp = 0
 
-acc = .5
-dcc = .5
+acc = 1
+dcc = 1
 
 grav = .3
 
 ground = -1
 list_colision = [obj_block]
 
-
+xscale = 1
+yscale = 1
 
 
 lsm_init("idle")
@@ -25,12 +26,19 @@ lsm_add_free_state({
             vsp += grav
         }
         
+        if hsp != 0{
+            xscale = sign(hsp)
+        }
+        
     },
     draw_gui: function(){
         draw_text(30,30,current_state)
         draw_text(30,60,hsp)
         draw_text(30,90,vsp)
         draw_text(30,120,INP.isHinput())
+    },
+    draw: function(){
+        draw_sprite_ext(sprite_index,image_index,x,y,xscale,yscale,image_angle,image_blend,image_alpha)
     }
 })
 

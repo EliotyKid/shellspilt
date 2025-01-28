@@ -1,5 +1,3 @@
-
-
 function __inputs(){
     return{
         r: function(){

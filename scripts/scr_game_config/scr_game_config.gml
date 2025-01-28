@@ -4,10 +4,10 @@ with(global.game_settings){
     view_cam = noone
     view_width = 320
     view_height = 180
-    gui_width = view_width
-    gui_height =  view_height
+    gui_width = view_width*2
+    gui_height =  view_height*2
     window_caption = "Teste inicial"
-    window_scale = 3
+    window_scale = 4
     window_width = view_width*window_scale
     window_height = view_height*window_scale
     start_fullscreen = false

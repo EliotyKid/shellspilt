@@ -14,29 +14,11 @@ ground = -1
 list_colision = [obj_block]
 
 
-imput_check = function (){
-    var _r = keyboard_check(ord("D"))
-    var _l = keyboard_check(ord("A"))
-    var _d = keyboard_check(ord("S"))
-    var _u = keyboard_check(ord("W"))
-    
-    var _is_pressed = (_r || _l || _d || _u)
-    
-    return {
-        r : keyboard_check(ord("D")),
-        l : keyboard_check(ord("A")),
-        d : keyboard_check(ord("S")),
-        u : keyboard_check(ord("W")),
-        is_pressed : _is_pressed
-    }
-}
 
-imp = -1
 
 lsm_init("idle")
 lsm_add_free_state({
     step: function(){
-        imp = imput_check()
         ground = place_meeting(x,y+1,list_colision)
         
         if !ground{
@@ -48,13 +30,14 @@ lsm_add_free_state({
         draw_text(30,30,current_state)
         draw_text(30,60,hsp)
         draw_text(30,90,vsp)
+        draw_text(30,120,INP.isHinput())
     }
 })
 
 lsm_add("idle",{
     step: function(){
-        var move_h = imp.r - imp.l
-        if imp.r || imp.l{
+        var move_h = INP.r() - INP.l()
+        if INP.isHinput(){
             lsm_change("run")
         }else{
             hsp = lerp(hsp,max_hsp*move_h,dcc)
@@ -64,9 +47,9 @@ lsm_add("idle",{
 
 lsm_add("run",{
     step: function(){
-        var move_h = imp.r - imp.l
+        var move_h = INP.r() - INP.l()
         
-        if imp.r || imp.l{
+        if INP.r() || INP.l(){
             hsp = lerp(hsp,max_hsp*move_h,acc)
         }else{
             hsp = lerp(hsp,max_hsp*move_h,dcc)

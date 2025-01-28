@@ -11,9 +11,10 @@ function __sub_state_execute(_state){
 }
 
 ///@desc initializes the variables for the state machine
-function lsm_init(){
+///@arg {String} _init_state the initial state
+function lsm_init(_init_state){
     self[$ "states"] = []
-    self[$ "current_state"] = noone
+    self[$ "current_state"] = _init_state
     self[$ "enter_state"] = false
     self[$ "free_state_enable"] = false
 }

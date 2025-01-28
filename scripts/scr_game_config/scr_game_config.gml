@@ -10,9 +10,9 @@ with(global.game_settings){
     window_scale = 3
     window_width = view_width*window_scale
     window_height = view_height*window_scale
-    start_fullscreen = true
+    start_fullscreen = false
     cursor_visible = true
-    room_start = rm_main
+    room_start = rm_test
 }
 
 function game_init(){

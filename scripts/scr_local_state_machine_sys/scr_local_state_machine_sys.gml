@@ -10,7 +10,7 @@ function __sub_state_execute(_state){
     if !is_undefined(self[$ current_state+"_"+_state]) script_execute(self[$ current_state+"_"+_state])
 }
 
-///@desc inicia as variaves para a maquina de estados
+///@desc initializes the variables for the state machine
 function lsm_init(){
     self[$ "states"] = []
     self[$ "current_state"] = noone
@@ -18,7 +18,7 @@ function lsm_init(){
     self[$ "free_state_enable"] = false
 }
 
-///@desc atualiza o estado a cada frame
+///@desc updates the state every frame
 function lsm_update(){
     if free_state_enable{
         if !is_undefined(self[$ "free_state_step_begin"]) script_execute(self[$ "free_state_step_begin"])
@@ -40,13 +40,13 @@ function lsm_update(){
     
 }
 
-///@desc desenha o draw de cada estado
+///@desc draw the design of each state
 function lsm_draw(){
     if !is_undefined(self[$ "free_state_draw"]) script_execute(self[$ "free_state_draw"])
     __sub_state_execute("draw")
 }
 
-///@desc desenha o draw gui de cada estado
+///@desc draw the drawn gui of each state
 function lsm_draw_gui(){
      if !is_undefined(self[$ "free_state_draw_gui"]) script_execute(self[$  "free_state_draw_gui"])
      __sub_state_execute("draw_gui")
@@ -54,9 +54,9 @@ function lsm_draw_gui(){
 
 
 
-///@desc adiciona um novo estado
-/// @arg {String} _name o nome do estado
-/// @arg {Struct} _stru a estrutura com os sub estado
+///@desc add a new state
+/// @arg {String} _name the name of the state
+/// @arg {Struct} _stru the structure with the sub states
 function lsm_add(_name, _stru = {}){
     array_push(states,_name)
     
@@ -75,15 +75,15 @@ function lsm_add(_name, _stru = {}){
     __add_sub_state(_name,_stru,"leave")
 }
 
-///@desc muda de estado
-///@arg {String} _name nome do estado de destino
+///@desc change state
+///@arg {String} _name name of the destination state
 function lsm_change(_name){
     if !is_undefined(self[$ current_state+"_leave"]) script_execute(self[$ current_state+"_leave"])
     current_state = _name
     enter_state = false
 }
 
-///@desc adiciona um estado que vai rodar todo tempo
+///@desc adds a state that will run all the time
 function lsm_add_free_state(_stru={ }){
     var _name = "free_state"
     free_state_enable = true
@@ -100,10 +100,5 @@ function lsm_add_free_state(_stru={ }){
     
     __add_sub_state(_name,_stru,"leave")
 }
-
-
-
-
-
 
 
